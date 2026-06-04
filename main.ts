@@ -7,6 +7,9 @@
 
 let distance = 0
 
+let servoDirection = 0
+let motionDetected = false
+
 basic.forever(function () {
    
     distance = sonar.ping(
@@ -16,16 +19,30 @@ basic.forever(function () {
     )
 
     if (distance > 0 && distance < 10) {
+        
+        if (!motionDetected) {
+            motionDetected = true
 
-       
-        pins.digitalWritePin(DigitalPin.P8, 1) 
-       
+            pins.digitalWritePin(DigitalPin.P8, 1)
+            
+            if (servoDirection == 0) {
+                
+                robotbit.Servo(robotbit.Servos.S8, 45)
+                servoDirection = 1
+            } else {
+                
+                robotbit.Servo(robotbit.Servos.S8, 135)
+                servoDirection = 0
+            }
+
+            basic.pause(800)
+        }
+
     } else {
-
-   
+        
+        motionDetected = false
         pins.digitalWritePin(DigitalPin.P8, 0)
         basic.clearScreen()
-
     }
 
     basic.pause(100)
