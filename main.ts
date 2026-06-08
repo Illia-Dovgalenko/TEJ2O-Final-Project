@@ -2,7 +2,7 @@
  *
  * Created by: Illia
  * Created on: Sep 2026
- * This program 
+ * This program Automatic light switching
 */
 
 let distance = 0
@@ -18,24 +18,24 @@ basic.forever(function () {
         PingUnit.Centimeters
     )
 
-    if (distance > 0 && distance < 10) {
+    if (distance < 10) {
         
-        if (!motionDetected) {
-            motionDetected = true
+     if (!motionDetected) {
+      motionDetected = true
 
-            pins.digitalWritePin(DigitalPin.P8, 1)
+        pins.digitalWritePin(DigitalPin.P8, 1)
             
-            if (servoDirection == 0) {
+        if (servoDirection == 0) {
                 
-                robotbit.Servo(robotbit.Servos.S8, 45)
+                robotbit.Servo(robotbit.Servos.S8, 0)
                 servoDirection = 1
-            } else {
+        } else {
                 
-                robotbit.Servo(robotbit.Servos.S8, 135)
+                robotbit.Servo(robotbit.Servos.S8, 180)
                 servoDirection = 0
-            }
+        }
 
-            basic.pause(800)
+        basic.pause(800)
         }
 
     } else {
