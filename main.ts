@@ -18,7 +18,7 @@ basic.forever(function () {
         PingUnit.Centimeters
     )
 
-    if (distance < 10) {
+    if (distance > 0 && distance < 10) {
         
      if (!motionDetected) {
       motionDetected = true
